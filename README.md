@@ -17,6 +17,7 @@ App allow to user to create his own library, by adding books that have been read
     - style.css 
     - assets folder for images
   - src 
+   -srever
     - server.js
     - router.js
     - handler.js
