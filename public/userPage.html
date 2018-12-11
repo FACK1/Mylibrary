@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../public/css/userStyle.css">
+      <link rel="stylesheet" href="../public/css/resets.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <title></title>
+   </head>
+   <body>
+      <h3 id="userName">user name</h3>
+      <!-- add user name -->
+      <button type="button" name="button">Logout</button>
+      <section id="addBook">
+         <h2>Add Book</h2>
+         <label for="bookName"><input type="text" name="bookName" value="" placeholder="Enter book name">Book name</label>
+         <label for="bookImg"><input type="text" name="bookImg" value="" placeholder="Book image">Book name</label>
+         <label for="bookLink"><input type="text" name="bookLink" value="" placeholder="Book link">Book name</label>
+         <label for="bookRate">
+            <select>
+               <option value="not good">1</option>
+               <option value="not bad">2</option>
+               <option value="good">3</option>
+               <option value="very good">4</option>
+               <option value="excellent">5</option>
+            </select>
+            Rating
+         </label>
+      </section>
+      <section id="search">
+         <h2>Search</h2>
+         <div>
+            <input type="text" name="search" value="" id="search_text" required>
+            <button type="button" id="searchButton"><i class="fa fa-search"></i></button>
+         </div>
+         <div class="resultsContainer">
+            <!-- <div class="bookContainer">  add books result here
+               <p>book name</p>
+               <img src="" alt="book image">
+               <a href="#">
+                  <p>book link</p>
+               </a>
+               <p>rating</p>
+            </div> -->
+         </div>
+      </section>
+      <script type="text/javascript"  src="../public/js/dom.js"></script>
+   </body>
+</html>
