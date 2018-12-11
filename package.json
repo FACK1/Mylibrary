@@ -1,0 +1,37 @@
+{
+  "name": "mylibrary",
+  "version": "1.0.0",
+  "description": "App allow to user to create his own library, by adding books that have been read to their own list.",
+  "main": "index.js",
+  "dependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
+  },
+  "devDependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.3.1",
+    "eslint": "^5.10.0",
+    "jsonwebtoken": "^8.4.0",
+    "nodemon": "^1.18.8",
+    "pg": "^7.7.1",
+    "supertest": "^3.3.0"
+  },
+  "scripts": {
+    "test": "tape src/test/routesTest.js | tap-spec",
+    "start": "node src/server/server.js",
+    "dev": "nodemon src/server/server.js",
+    "lint": "eslint ./*",
+    "lint-fix": "eslint --fix ./"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACK1/Mylibrary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACK1/Mylibrary/issues"
+  },
+  "homepage": "https://github.com/FACK1/Mylibrary#readme"
+}
