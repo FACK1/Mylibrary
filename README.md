@@ -3,6 +3,7 @@ App allow to user to create his own library, by adding books that have been read
 
 # User journey :
   - As a user I want to create account to create own library.
+  - As a user I want to login to my account .
   - As a user I want to add book to my list .
   - As a user I want to search form my library books.
   - As a user I want to logout from my account .
