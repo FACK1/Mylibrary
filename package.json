@@ -4,6 +4,7 @@
   "description": "App allow to user to create his own library, by adding books that have been read to their own list.",
   "main": "index.js",
   "dependencies": {
+    "env2": "^2.2.2",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.1"
   },
@@ -22,7 +23,6 @@
     "dev": "nodemon src/server/server.js",
     "lint": "eslint ./*",
     "lint-fix": "eslint --fix ./"
-
   },
   "repository": {
     "type": "git",
