@@ -25,25 +25,5 @@ switch (`${req.method} ${pathname}`) {
   default:
       handler.notFoundHandler(request,response);
 }
- 	// if (pathname === '/' ) {
-	// 	handler.homeHandler(request,response);
-	// }
-	// else if (pathname.includes('.')) {
-  // 	handler.publicHandler(request,response);
-	// }
-	// else if (pathname.includes('/search/')) {
-	// 	handler.searchHandler(request,response);
-	// }
-	// else
-	// {
-	// 	handler.notFoundHandler(request,response);
-	// }
 }
 module.exports=router;
-// const payload = {
-//   userId: 2,
-//   username:'sama'
-// };
-// const secret='123sama123';
-// var token = jwt.sign(payload,secret);
-// const notFoundPage = '<p style="font-size: 10vh; text-align: center;">404!</p>';
