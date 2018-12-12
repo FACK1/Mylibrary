@@ -1,7 +1,7 @@
 const path = require('path');
 const queryString = require('querystring');
 const fs = require('fs');
-const cookie = require('cookie');
+
 
 //-----------------------------------------------------------------------------
 
@@ -44,11 +44,6 @@ const publicHandler = (request, response) => {
 
 //-----------------------------------------------------------------------------
 const  signUpHandler=(request, response) => {
-  const {query} = url.parse(request.url);
-  const {email} = queryString.parse(query);
-  const {password} = queryString.parse(query);
-  const {fullName} = queryString.parse(query);
-
 
 }
 
