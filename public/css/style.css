@@ -1,0 +1,89 @@
+body{
+  background-image: url('../css/34.jpg');
+  /* background-size: 100% 100%; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+   width: 100%;
+}
+
+h2{
+  font-size: 30px;
+  font-weight: bold;
+  color: #b13f61;
+}
+
+h1{
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 100px;
+}
+
+label{
+  font-size: 20px;
+}
+
+input[type=text], input[type=email], input[type=password]{
+  font-size: 18px;
+}
+
+.mainContainer{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 100%;
+}
+
+.loginContainer{
+  padding-top: 50px;
+}
+
+.loginInput{
+display: flex;
+flex-flow: column wrap;
+justify-content: flex-end;
+margin-bottom: 15px;
+}
+
+#login, #submit{
+  background-color: #b13f61;
+  color: white;
+  align-self: center;
+  font-size: 16px;
+}
+
+.forms{
+visibility: hidden;
+margin-top: 30px;
+margin-bottom: 30px;
+}
+
+.input-icon{
+  margin-bottom: 15px;
+  display: flex;
+  color: #b13f61;
+  flex-flow: row-reverse;
+  align-items: center;
+}
+
+.formInput{
+
+  display: flex;
+  flex-direction: column;
+}
+
+#signUp{
+  align-self: center;
+  font-size: 16px;
+  color: #b13f61;
+}
+
+@media only screen and (min-width: 600px) {
+  .loginContainer{
+    display: flex;
+  }
+
+  .loginInput{
+    margin-left: 10px;
+  }
+}
