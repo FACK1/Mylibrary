@@ -1,6 +1,6 @@
 const handler = require('./handler');
 const url = require('url');
-
+const homeHandler=require('./homeHandler')
 const router =(request,response)=>{
 var {pathname} = url.parse(request.url)
 pathname ="/"+ pathname.split('/')[1];
@@ -9,7 +9,7 @@ pathname ="/"+ pathname.split('/')[1];
 
 switch (`${request.method} ${pathname}`) {
   case 'GET /':
-    handler.homeHandler(request,response);
+    homeHandler(request,response);
     break;
   case 'GET /public':
     handler.publicHandler(request,response);
