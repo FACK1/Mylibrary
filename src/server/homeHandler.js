@@ -3,13 +3,14 @@ const path = require('path');
 const fs = require('fs');
 const cookie = require('cookie');
 const jwt = require('jsonwebtoken');
-const SECRET = '123book123';
+require('env2')('./config.env');
+let { SECRET} = process.env;
 const userDetails = {
 	userId: 5,
 };
 
 const homeHandler = (request, response) => {
-  var token = jwt.sign(userDetails, SECRET);
+  const token = jwt.sign(userDetails, SECRET);
   if (request.headers.cookie) {
       //console.log(cookie.parse(request.headers.cookie).logged_in);
 

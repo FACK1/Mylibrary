@@ -1,16 +1,7 @@
 const path = require('path');
-const querystring = require('querystring');
-const requester = require('request');
+const queryString = require('querystring');
 const fs = require('fs');
 const cookie = require('cookie');
-const jwt = require('jsonwebtoken');
-
-const SECRET = '123book123';
-const userDetails = {
-	userId: 5,
-};
-
-var token = jwt.sign(userDetails, SECRET);
 
 //-----------------------------------------------------------------------------
 
@@ -53,10 +44,10 @@ const publicHandler = (request, response) => {
 
 //-----------------------------------------------------------------------------
 const  signUpHandler=(request, response) => {
-  var {query} = url.parse(request.url);
-  var {email} = queryString.parse(query);
-  var {password} = queryString.parse(query);
-  var {fullName} = queryString.parse(query);
+  const {query} = url.parse(request.url);
+  const {email} = queryString.parse(query);
+  const {password} = queryString.parse(query);
+  const {fullName} = queryString.parse(query);
 
 
 }
@@ -94,7 +85,6 @@ const notFoundHandler = (request, response) => {
 	return response.end('Page not found!')
 }
 module.exports = {
-	
 	publicHandler,
 	loginHandler,
 	logoutHandler,
