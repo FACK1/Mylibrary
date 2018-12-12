@@ -46,18 +46,15 @@ const publicHandler = (request, response) => {
 
 //-----------------------------------------------------------------------------
 const signUpHandler = (request, response) => {
-	const {
-		query
-	} = url.parse(request.url);
-	const {
-		email
-	} = queryString.parse(query);
-	const {
-		password
-	} = queryString.parse(query);
-	const {
-		name
-	} = queryString.parse(query);
+
+	let data = '';
+		request.on('data', chunk => {
+			data += chunk;
+		});
+
+		request.on('end', (err) => {
+			const { email, password,	name	} = queryString.parse(data);
+
 
 	checkuser(email, (err, res) => {
 		if (err) {
@@ -108,6 +105,8 @@ const signUpHandler = (request, response) => {
 		}
 
 	})
+
+})
 }
 
 const loginHandler = (request, response) => {
