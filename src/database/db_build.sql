@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     id          SERIAL        PRIMARY KEY,
     name        TEXT          NOT NULL,
     email       VARCHAR(200)  NOT NULL,
-    password    VARCHAR(32)   NOT NULL
+    password    TEXT   NOT NULL
 );
 
 INSERT INTO users (name,email,password) VALUES ('samar','samar@gmail.com','samar123');
