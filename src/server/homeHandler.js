@@ -66,5 +66,8 @@ const homeHandler = (request, response) => {
   }
 
 };
-
+const notFoundHandler = (request, response) => {
+	response.writeHead(404)
+	return response.end('Page not found!')
+}
 module.exports=homeHandler;

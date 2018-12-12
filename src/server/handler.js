@@ -1,10 +1,12 @@
 const path = require('path');
 const queryString = require('querystring');
 const fs = require('fs');
-
+const url = require('url')
+const register = require('../queries/register');
+const checkuser = require('../queries/checkuser');
+const bcrypt = require("bcryptjs");
 
 //-----------------------------------------------------------------------------
-
 
 
 //-----------------------------------------------------------------------------
@@ -26,7 +28,7 @@ const publicHandler = (request, response) => {
 		return;
 	}
 
-	const filePath = path.join(__dirname, '..','..', request.url);
+	const filePath = path.join(__dirname, '..', '..', request.url);
 	fs.readFile(filePath, (error, file) => {
 		if (error) {
 			response.writeHead(500, {
@@ -43,8 +45,68 @@ const publicHandler = (request, response) => {
 };
 
 //-----------------------------------------------------------------------------
-const  signUpHandler=(request, response) => {
+const signUpHandler = (request, response) => {
 
+	let data = '';
+		request.on('data', chunk => {
+			data += chunk;
+		});
+
+		request.on('end', (err) => {
+			const { email, password,	name	} = queryString.parse(data);
+
+
+	checkuser(email, (err, res) => {
+		if (err) {
+			response.writeHead(500, {
+				'Content-Type': 'plain/text'
+			});
+			response.end("Server Error");
+		} else {
+
+			if (res.length <= 0) {
+
+				bcrypt.genSalt(10, function (err, salt) {
+					bcrypt.hash(password, salt, function (err, hash) {
+						if (err) {
+							response.statusCode = 500;
+							response.end('Error registered in')
+							return
+						} else {
+							console.log(hash);
+							register(name, email, hash, (err) => {
+								if (err) {
+									response.writeHead(500, {
+										'Content-Type': 'plain/text'
+									});
+									response.end("Server Error");
+								} else {
+									response.writeHead(302, {
+										'Location': '/'
+									});
+									response.end();
+								}
+							});
+
+
+						}
+					});
+				});
+
+
+			} else {
+
+				response.writeHead(200, {
+					'Content-Type': 'application/json'
+				});
+				response.end("email exist");
+			}
+
+		}
+
+	})
+
+})
 }
 
 const loginHandler = (request, response) => {
@@ -85,5 +147,5 @@ module.exports = {
 	logoutHandler,
 	addbookHandler,
 	notFoundHandler,
-  signUpHandler
+	signUpHandler
 };
