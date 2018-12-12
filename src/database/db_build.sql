@@ -15,12 +15,13 @@ CREATE TABLE IF NOT EXISTS books (
     id          SERIAL     PRIMARY KEY,
     title       TEXT       NOT NULL,
     img         VARCHAR(250) ,
+    link        TEXT ,
     dis         TEXT       NOT NULL,
     rate        INTEGER  NOT NULL,
     user_id     INTEGER
 );
 
-INSERT INTO books (title,dis,img,rate,user_id) VALUES ('bookname','dis','img','7','1');
+INSERT INTO books (title,dis,img,link,rate,user_id) VALUES ('bookname','dis','img','link','7','1');
 
 
 COMMIT;
