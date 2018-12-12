@@ -14,7 +14,7 @@ switch (`${request.method} ${pathname}`) {
   case 'GET /public':
     handler.publicHandler(request,response);
       break;
-  case 'GET /singup':
+  case 'GET /signup':
     handler.signUpHandler(request,response);
       break;
   case 'POST /login':
