@@ -1,65 +1,76 @@
 const path = require('path');
 const querystring = require('querystring');
 const requester = require('request');
-const { readFile } = require('fs');
+const fs = require('fs');
 const cookie = require('cookie');
 const jwt = require('jsonwebtoken');
-const getData=require('./queries/get.js');
-const setData=require('./queries/set.js');
-const check=require('./queries/check.js');
-const alert = require('alert-node');
 
-const secret='123book123';
-var token = jwt.sign(payload,secret);
+//const getData=require('./queries/get.js');
+//const setData=require('./queries/set.js');
+//const check=require('./queries/check.js');
+//const alert = require('alert-node');
+const SECRET = '123book123';
+const userDetails = {
+	userId: 5,
+};
+
+var token = jwt.sign(userDetails, SECRET);
 
 //-----------------------------------------------------------------------------
 
 const homeHandler = (request, response) => {
-  const send401 = () => {
-        const message = 'fail!';
-        res.writeHead(
-          401,
+  if (request.headers.cookie) {
+      //console.log(cookie.parse(request.headers.cookie).logged_in);
+
+      jwt.verify(cookie.parse(request.headers.cookie).logged_in, SECRET, function(error, resp) {
+        if(resp)
           {
-            'Content-Type': 'text/plain',
-            'Content-Length': message.length
+            const message = 'success!';
+            response.writeHead(
+              200,
+              {
+                'Content-Type': 'text/plain'
+              }
+            );
+             response.end(message);
+          }else if(!resp){
+            const htmlPath = path.join(__dirname, '..','..', 'public', 'index.html');
+          //  console.log(htmlPath);
+            fs.readFile(htmlPath, (error, file) => {
+              if (error) {
+                notFoundHandler(request, response);
+                return;
+              }
+              response.writeHead(200, {
+                'Content-Type': 'text/html'
+              });
+              response.end(file);
+            });
           }
-        );
-        return res.end(message);
-      }
-  const { jwt } = parse(req.headers.cookie);
 
-      if (!jwt) return send401();
-
-      return verify(jwt, SECRET, (err, jwt) => {
-        if (err) {
-          return send401();
-        } else {
-          const message = `Your user id is: ${jwt.userId}`;
-          res.writeHead(
-            200,
-            {
-              'Content-Type': 'text/plain',
-              'Content-Length': message.length
-            }
-          );
-          return res.end(message);
-        }
+          else if (error) {
+            const message = 'fail!';
+            response.writeHead(
+              401,
+              {
+                'Content-Type': 'text/plain'
+              }
+            );
+             response.end(message);
+          }
       });
-
-  ///////
-  if (req.headers.cookie) {
-      profileHandler(re)
-  }
-  else {
-    const htmlPath = path.join(__dirname, '..', 'public', 'index.html');
+  }else {
+    const htmlPath = path.join(__dirname, '..','..', 'public', 'index.html');
     fs.readFile(htmlPath, (error, file) => {
       if (error) {
         notFoundHandler(request, response);
         return;
       }
-      response.writeHead(200, { 'Content-Type': 'text/html' });
+      response.writeHead(200, {
+        'Content-Type': 'text/html'
+      });
       response.end(file);
-    });
+    })
   }
 
 };
@@ -67,74 +78,94 @@ const homeHandler = (request, response) => {
 //-----------------------------------------------------------------------------
 
 const publicHandler = (request, response) => {
-  const extention = request.url.split('.')[1];
-  const ContentTypeMapping = {
-    html: 'text/html',
-    css: 'text/css',
-    js: 'application/js',
-    jpg: 'image/jpg',
-    png: 'image/png',
-    ico: 'image/x-ico',
-    jpeg:'image/jpeg',
-  };
+	const extention = request.url.split('.')[1];
+	const ContentTypeMapping = {
+		html: 'text/html',
+		css: 'text/css',
+		js: 'application/js',
+		jpg: 'image/jpg',
+		png: 'image/png',
+		ico: 'image/x-ico',
+		jpeg: 'image/jpeg',
+	};
 
-  if (ContentTypeMapping[extention] === undefined) {
-    notFoundHandler(request, response);
-    return;
-  }
+	if (ContentTypeMapping[extention] === undefined) {
+		notFoundHandler(request, response);
+		return;
+	}
 
-  const filePath = path.join(__dirname, '..', 'public', request.url);
-  fs.readFile(filePath, (error, file) => {
-    if (error) {
-      response.writeHead(500, { 'Content-Type': 'text/html' });
-      response.end('<h1>Sorry, There is an error!</h1>');
-      return;
-    }
-    response.writeHead(200, { 'Content-Type': ContentTypeMapping[extention] });
-    response.end(file);
-  });
+	const filePath = path.join(__dirname, '..','..', request.url);
+	fs.readFile(filePath, (error, file) => {
+		if (error) {
+			response.writeHead(500, {
+				'Content-Type': 'text/html'
+			});
+			response.end('<h1>Sorry, There is an error!</h1>');
+			return;
+		}
+		response.writeHead(200, {
+			'Content-Type': ContentTypeMapping[extention]
+		});
+		response.end(file);
+	});
 };
 
 //-----------------------------------------------------------------------------
+const  signUpHandler=(request, response) => {
+  var {query} = url.parse(request.url);
+  var {email} = queryString.parse(query);
+  var {password} = queryString.parse(query);
+  var {fullName} = queryString.parse(query);
+//  setData(fullName,email, password, (err, res) => {
+  //)};
 
-const loginHandler = (request,response) => {
+}
 
-  var { query }=url.parse(request.url);
-  var {email}=queryString.parse(query);
-  var {password}=queryString.parse(query);
-  getData(email,password,(err, res) => {
-    if (err){
-      response.writeHead(500, { 'Content-Type': 'plain/text' });
-      response.end("Server Error");
-    }
-    else {
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify(res));
-    }
-});
-
-
-  response.writeHead(302, { 'Location': '/','Set-Cookie': [`logged_in=${token}; HttpOnly; Max-Age=9000`] });
-  response.end();
+const loginHandler = (request, response) => {
+  //
+	// var {query} = url.parse(request.url);
+	// var {email} = queryString.parse(query);
+	// var {password} = queryString.parse(query);
+	// getData(email, password, (err, res) => {
+	// 	if (err) {
+	// 		response.writeHead(500, {
+	// 			'Content-Type': 'plain/text'
+	// 		});
+	// 		response.end("Server Error");
+	// 	} else {
+	// 		response.writeHead(200, {
+	// 			'Content-Type': 'application/json'
+	// 		});
+	// 		response.end(JSON.stringify(res));
+	// 	}
+	// });
+	// response.writeHead(302, {
+	// 	'Location': '/',
+	// 	'Set-Cookie': [`logged_in=${token}; HttpOnly; Max-Age=9000`]
+	// });
+	// response.end();
 }
 //-----------------------------------------------------------------------------
 
-const profileHandler = (request,response) => {
+const profileHandler = (request, response) => {
 
-    }
+}
 
 
 //-----------------------------------------------------------------------------
 
-const logoutHandler = (request,response) => {
-  response.writeHead(302,{'Location': '/','Set-Cookie': `logged_in=${0}; Max-Age=0`});
-  response.end();
-    }
+const logoutHandler = (request, response) => {
+	response.writeHead(302, {
+		'Location': '/',
+		'Set-Cookie': `logged_in=${0}; Max-Age=0`
+	});
+	response.end();
+}
 //-----------------------------------------------------------------------------
 
-const addbookHandler = (request,response) => {
+const addbookHandler = (request, response) => {
 
-    }
+}
 
 //-----------------------------------------------------------------------------
 
@@ -172,7 +203,15 @@ const addbookHandler = (request,response) => {
 //-----------------------------------------------------------------------------
 
 const notFoundHandler = (request, response) => {
-  response.writeHead(404)
-  return response.end('Page not found!')
+	response.writeHead(404)
+	return response.end('Page not found!')
 }
-module.exports = { homeHandler, publicHandler, loginHandler, logoutHandler, addbookHandler, notFoundHandler};
+module.exports = {
+	homeHandler,
+	publicHandler,
+	loginHandler,
+	logoutHandler,
+	addbookHandler,
+	notFoundHandler,
+  signUpHandler
+};

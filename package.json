@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "env2": "^2.2.2",
+    "request": "^2.88.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.1"
   },
