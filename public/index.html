@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../public/css/resets.css">
+      <link rel="stylesheet" href="../public/css/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <title>My Library</title>
+   </head>
+   <body>
+      <h2>My Library</h2>
+      <div class="mainContainer">
+         <h1>Create Your Own Library</h1>
+         <div class="loginContainer">
+            <div class="loginInput">
+               <label for="email">E-mail</label>
+               <input type="text" name="email" value="" placeholder="Type your email">
+            </div>
+            <div class="loginInput">
+               <label for="password">Password</label>
+               <input type="text" name="password" value="" placeholder="Type your password">
+            </div>
+            <div class="loginInput">
+               <button type="button" id="login" name="login">Log in</button>
+            </div>
+         </div>
+         <button type="button" id="signUp">Create new account</button>
+         <form id="signForm" class="forms" action="/signup/" method="POST">
+            <div class="formInput">
+               <div class="input-icon">
+                  <input type="text" placeholder="Full Name" required/>
+                  <i class="fa fa-user"></i>
+               </div>
+               <div class="input-icon">
+                  <input type="email" placeholder="Email Adress" required/>
+                  <i class="fa fa-envelope"></i>
+               </div>
+               <div class="input-icon">
+                  <input type="password" placeholder="Password" required/>
+                  <i class="fa fa-key"></i>
+               </div>
+               <div class="input-icon">
+                  <input type="password" placeholder="Password Confirm" required/>
+                  <i class="fa fa-key"></i>
+               </div>
+               <input type="submit" id="submit" name="submit" value="submit">
+            </div>
+         </form>
+      </div>
+      <script type="text/javascript"  src="../public/js/dom.js"></script>
+      <script type="text/javascript"  src="../public/js/signupForm.js"></script>
+   </body>
+</html>
