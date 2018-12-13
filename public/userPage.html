@@ -11,7 +11,9 @@
    <body>
       <h3 id="userName">user name</h3>
       <!-- add user name -->
-      <button type="button" name="button">Logout</button>
+      <form action="/logout" method="GET">
+      <input type="submit"  value="Log out">
+    </form>
       <section id="addBook">
          <h2>Add Book</h2>
          <label for="bookName"><input type="text" name="bookName" value="" placeholder="Enter book name">Book name</label>
