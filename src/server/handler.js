@@ -8,9 +8,9 @@ const getUser = require('../queries/get');
 const bcrypt = require("bcryptjs");
 const alert = require('alert-node');
 const jwt = require('jsonwebtoken');
+const cookie=require('cookie');
 require('env2')('./config.env');
 const { SECRET } = process.env;
-
 
 
 //-----------------------------------------------------------------------------
@@ -51,18 +51,9 @@ const publicHandler = (request, response) => {
 //-----------------------------------------------------------------------------
 
 const logoutHandler = (request, response) => {
-	response.writeHead(302, {	'Location': '/', 'Set-Cookie': 'Max-Age=0' });
+	response.writeHead(302, {	'Location': '/', 'Set-Cookie': 'logged_in=0; Max-Age=0;' });
 	response.end();
 }
-
-//-----------------------------------------------------------------------------
-
-const addbookHandler = (request, response) => {
-
-}
-
-//-----------------------------------------------------------------------------
-
 
 //-----------------------------------------------------------------------------
 
@@ -114,7 +105,7 @@ fs.readFile(filePath, (error, file) => {
 const token = jwt.sign({id, email}, SECRET);
 
               response.writeHead(200, {
-                'Set-Cookie':`logged_in=${token} id=${id}; Max-Age=9000;`,
+                'Set-Cookie':`logged_in=${token}; Max-Age=9000;`,
                 'Content-Type': 'text/html'
             });
               response.end(file);
@@ -125,7 +116,6 @@ const token = jwt.sign({id, email}, SECRET);
 module.exports = {
 	publicHandler,
 	logoutHandler,
-	addbookHandler,
 	notFoundHandler,
 	htmlFileHandler,
 	setTokenHandler,
