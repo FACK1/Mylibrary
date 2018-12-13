@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Mali" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="../public/css/resets.css">
       <link rel="stylesheet" href="../public/css/style.css">
@@ -14,35 +16,33 @@
       <div class="mainContainer">
          <h1>Create Your Own Library</h1>
          <div class="loginContainer">
+           <form id="loginForm" action="/login" method="POST">
             <div class="loginInput">
                <label for="email">E-mail</label>
-               <input type="text" name="email" value="" placeholder="Type your email">
+               <input type="text" name="email" type="email" value="" placeholder="Type your email">
             </div>
             <div class="loginInput">
                <label for="password">Password</label>
-               <input type="text" name="password" value="" placeholder="Type your password">
+               <input name="password" type="password" value="" placeholder="Type your password">
             </div>
             <div class="loginInput">
-               <button type="button" id="login" name="login">Log in</button>
+               <input type="submit" id="login" name="login" value="Log in">
             </div>
+          </form>
          </div>
          <button type="button" id="signUp">Create new account</button>
-         <form id="signForm" class="forms" action="/signup/" method="POST">
+         <form id="signForm" class="forms" action="/signup" method="POST">
             <div class="formInput">
                <div class="input-icon">
-                  <input type="text" placeholder="Full Name" required/>
+                  <input type="text" placeholder="Full Name" name="name" required/>
                   <i class="fa fa-user"></i>
                </div>
                <div class="input-icon">
-                  <input type="email" placeholder="Email Adress" required/>
+                  <input type="email" placeholder="Email Adress" name="email" required/>
                   <i class="fa fa-envelope"></i>
                </div>
                <div class="input-icon">
-                  <input type="password" placeholder="Password" required/>
-                  <i class="fa fa-key"></i>
-               </div>
-               <div class="input-icon">
-                  <input type="password" placeholder="Password Confirm" required/>
+                  <input type="password" placeholder="Password" name="password" required/>
                   <i class="fa fa-key"></i>
                </div>
                <input type="submit" id="submit" name="submit" value="submit">

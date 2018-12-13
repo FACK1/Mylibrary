@@ -1,11 +1,16 @@
 const handler = require('./handler');
 const url = require('url');
 const homeHandler=require('./homeHandler')
+const login = require('./loginHandler');
+const signup = require('./signupHandler');
+const addbook = require('./addbookHandler');
+
+
 const router =(request,response)=>{
+
 var {pathname} = url.parse(request.url)
 pathname ="/"+ pathname.split('/')[1];
-// console.log(request.method);
-// console.log(pathname);
+
 
 switch (`${request.method} ${pathname}`) {
   case 'GET /':
@@ -14,20 +19,17 @@ switch (`${request.method} ${pathname}`) {
   case 'GET /public':
     handler.publicHandler(request,response);
       break;
-  case 'GET /singup':
-    handler.signUpHandler(request,response);
+  case 'POST /signup':
+    signup(request,response);
       break;
   case 'POST /login':
-    handler.loginHandler(request,response);
+    login(request,response);
     break;
-  case 'POST /logout':
+  case 'GET /logout':
     handler.logoutHandler(request,response);
     break;
-  case 'GET /addbook':
-    handler.addbookHandler(request,response);
-    break;
-  case 'GET /profile':
-    handler.profileHandler(request,response);
+  case 'POST /addbook':
+    addbook(request,response);
     break;
   default:
       handler.notFoundHandler(request,response);
