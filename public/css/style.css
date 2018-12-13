@@ -1,6 +1,5 @@
 body{
   background-image: url('../css/34.jpg');
-  /* background-size: 100% 100%; */
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -8,23 +7,45 @@ body{
 }
 
 h2{
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   color: #b13f61;
+  text-align: center;
+  background-color: #cdc5c5c9;
+  padding: 10px;
+  border-radius: 100px;
+  font-family: 'Architects Daughter', cursive;
 }
 
 h1{
   font-size: 24px;
   font-weight: bold;
-  padding-top: 100px;
+  margin-top: 50px;
+  color: #b13f61;
+  text-align: center;
+  background-color: #cdc5c5c9;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Architects Daughter', cursive;
 }
 
 label{
   font-size: 20px;
+  background-color: #cdc5c5c9;
+  padding: 10px;
+  border-radius:5px;
+  text-align: center;
+  color: #b13f61;
+  font-weight: bold;
+  font-family: 'Mali', cursive;
 }
 
 input[type=text], input[type=email], input[type=password]{
   font-size: 18px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius:5px;
+  font-family: 'Mali', cursive;
 }
 
 .mainContainer{
@@ -49,7 +70,11 @@ margin-bottom: 15px;
   background-color: #b13f61;
   color: white;
   align-self: center;
-  font-size: 16px;
+  font-size:20px;
+  padding: 10px;
+  width: -webkit-fill-available;
+  font-weight: bold;
+  font-family: 'Mali', cursive;
 }
 
 .forms{
@@ -74,8 +99,21 @@ margin-bottom: 30px;
 
 #signUp{
   align-self: center;
-  font-size: 16px;
   color: #b13f61;
+  background-color: #b13f61;
+  color: white;
+  font-size:20px;
+  padding: 10px;
+  width:auto;
+  font-weight: bold;
+  font-family: 'Mali', cursive;
+}
+i{
+  border-style: solid;
+  background-color: gray;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16pt;
 }
 
 @media only screen and (min-width: 600px) {
