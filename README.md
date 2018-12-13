@@ -25,6 +25,7 @@ App allow to user to create his own library, by adding books that have been read
     - homeHandler.js
     - loginHandler.js
     - signupHandler.js
+    - addbookHandler.js
    - tests
      - test.js
    - database
