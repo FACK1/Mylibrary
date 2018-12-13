@@ -3,6 +3,7 @@ const url = require('url');
 const homeHandler=require('./homeHandler')
 const login = require('./loginHandler');
 const signup = require('./signupHandler');
+const addbook = require('./addbookHandler');
 
 
 const router =(request,response)=>{
@@ -27,8 +28,8 @@ switch (`${request.method} ${pathname}`) {
   case 'GET /logout':
     handler.logoutHandler(request,response);
     break;
-  case 'GET /addbook':
-    handler.addbookHandler(request,response);
+  case 'POST /addbook':
+    addbook(request,response);
     break;
   default:
       handler.notFoundHandler(request,response);
