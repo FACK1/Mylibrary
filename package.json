@@ -4,6 +4,7 @@
   "description": "App allow to user to create his own library, by adding books that have been read to their own list.",
   "main": "index.js",
   "dependencies": {
+    "alert-node": "^1.2.3",
     "env2": "^2.2.2",
     "request": "^2.88.0",
     "tap-spec": "^5.0.0",

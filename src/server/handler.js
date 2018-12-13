@@ -4,9 +4,13 @@ const fs = require('fs');
 const url = require('url')
 const register = require('../queries/register');
 const checkuser = require('../queries/checkuser');
+const getUser = require('../queries/get');
 const bcrypt = require("bcryptjs");
+const alert = require('alert-node');
+const jwt = require('jsonwebtoken');
+require('env2')('./config.env');
+const { SECRET } = process.env;
 
-//-----------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------
@@ -45,87 +49,12 @@ const publicHandler = (request, response) => {
 };
 
 //-----------------------------------------------------------------------------
-const signUpHandler = (request, response) => {
-
-	let data = '';
-		request.on('data', chunk => {
-			data += chunk;
-		});
-
-		request.on('end', (err) => {
-			const { email, password,	name	} = queryString.parse(data);
-
-
-	checkuser(email, (err, res) => {
-		if (err) {
-			response.writeHead(500, {
-				'Content-Type': 'plain/text'
-			});
-			response.end("Server Error");
-		} else {
-
-			if (res.length <= 0) {
-
-				bcrypt.genSalt(10, function (err, salt) {
-					bcrypt.hash(password, salt, function (err, hash) {
-						if (err) {
-							response.statusCode = 500;
-							response.end('Error registered in')
-							return
-						} else {
-							console.log(hash);
-							register(name, email, hash, (err) => {
-								if (err) {
-									response.writeHead(500, {
-										'Content-Type': 'plain/text'
-									});
-									response.end("Server Error");
-								} else {
-									response.writeHead(302, {
-										'Location': '/'
-									});
-									response.end();
-								}
-							});
-
-
-						}
-					});
-				});
-
-
-			} else {
-
-				response.writeHead(200, {
-					'Content-Type': 'application/json'
-				});
-				response.end("email exist");
-			}
-
-		}
-
-	})
-
-})
-}
-
-const loginHandler = (request, response) => {
-
-}
-//-----------------------------------------------------------------------------
-
-const profileHandler = (request, response) => {
-
-}
-//-----------------------------------------------------------------------------
 
 const logoutHandler = (request, response) => {
-	response.writeHead(302, {
-		'Location': '/',
-		'Set-Cookie': `logged_in=${0}; Max-Age=0`
-	});
+	response.writeHead(302, {	'Location': '/', 'Set-Cookie': 'Max-Age=0' });
 	response.end();
 }
+
 //-----------------------------------------------------------------------------
 
 const addbookHandler = (request, response) => {
@@ -141,11 +70,67 @@ const notFoundHandler = (request, response) => {
 	response.writeHead(404)
 	return response.end('Page not found!')
 }
+
+//-----------------------------------------------------------------------------
+
+const serverErrorHandler = (request, response) => {
+  response.statusCode = 500;
+	response.end('Server Error, Sorry!')
+};
+
+//-----------------------------------------------------------------------------
+
+const forbiddenHandler = (request, response) => {
+	response.statusCode = 403;
+	response.end('Attachment Unavailable, No Permission')
+}
+
+const redirectHandler = (request, response) => {
+	response.writeHead(302, {	'Location': '/'	});
+	response.end();
+}
+
+const htmlFileHandler = (request, response, filePath) => {
+
+fs.readFile(filePath, (error, file) => {
+	if (error) {
+		notFoundHandler(request, response);
+		return;
+	}
+	response.writeHead(200, {
+		'Content-Type': 'text/html'
+	});
+	response.end(file);
+})
+}
+
+const setTokenHandler = (request, response, filePath, {id, email}) => {
+
+fs.readFile(filePath, (error, file) => {
+	if (error) {
+		notFoundHandler(request, response);
+		return;
+	}
+const token = jwt.sign({id, email}, SECRET);
+
+              response.writeHead(200, {
+                'Set-Cookie':`logged_in=${token} id=${id}; Max-Age=9000;`,
+                'Content-Type': 'text/html'
+            });
+              response.end(file);
+})
+}
+
+
 module.exports = {
 	publicHandler,
-	loginHandler,
 	logoutHandler,
 	addbookHandler,
 	notFoundHandler,
-	signUpHandler
+	htmlFileHandler,
+	setTokenHandler,
+	forbiddenHandler,
+redirectHandler,
+serverErrorHandler
+
 };
