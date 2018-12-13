@@ -9,7 +9,7 @@ App allow to user to create his own library, by adding books that have been read
   - As a user I want to logout from my account .
  
 
-# Website Link:[My Library](https://music-dbapp.herokuapp.com/)
+# Website Link:[My Library]
 # Architecture :
 - App Architecture 
 - file Structure 
@@ -22,6 +22,10 @@ App allow to user to create his own library, by adding books that have been read
     - server.js
     - router.js
     - handler.js
+    - homeHandler.js
+    - loginHandler.js
+    - signupHandler.js
+    - addbookHandler.js
    - tests
      - test.js
    - database
@@ -36,7 +40,7 @@ App allow to user to create his own library, by adding books that have been read
   
  
 # How to run our site on your machine?
-- git clone this repo **(https://github.com/FACK1/had-am-sa.git)**
+- git clone this repo **(https://github.com/FACK1/Mylibrary.git)**
 - Open your **command line**.
 - Put in terminal : **npm install** .
 - create database **CREATE DATABASE <database name here>; **
