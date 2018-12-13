@@ -1,0 +1,110 @@
+body{
+  background-image: url('../css/34.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+   width: 100%;
+}
+
+h2{
+  font-size: 20px;
+  font-weight: bold;
+  color: #b13f61;
+  text-align: center;
+  background-color: #cdc5c5c9;
+  padding: 10px;
+  border-radius: 100px;
+  font-family: 'Architects Daughter', cursive;
+}
+
+h1{
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 50px;
+  color: #b13f61;
+  text-align: center;
+  background-color: #cdc5c5c9;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Architects Daughter', cursive;
+}
+
+label{
+  font-size: 15px;
+  background-color: #cdc5c5c9;
+  padding: 7px;
+  border-radius:5px;
+  text-align: center;
+  color: #b13f61;
+  font-weight: bold;
+  font-family: 'Mali', cursive;
+  margin: 10px;
+}
+
+input[type=text], input[type=email], input[type=password]{
+  font-size: 15px;
+  padding: 5px;
+  font-weight: bold;
+  border-radius:5px;
+  font-family: 'Mali', cursive;
+  width: auto;
+  margin: 10px;
+}
+select{
+  font-size: 15px;
+  padding: 5px;
+  font-weight: bold;
+  border-radius:5px;
+  font-family: 'Mali', cursive;
+  width: 222px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+p{
+    font-family: 'Mali', cursive;
+}
+.res{
+  float: right;
+  margin-right: 100px;
+}
+
+.mainContainer{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 100%;
+}
+
+i{
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16pt;
+}
+.header{
+  display: flex;
+}
+#userName{
+  float: left;
+  border-radius: 10px;
+  background-color: gray;
+  padding: 5px;
+}
+#logout{
+  float: right;
+  margin-left: 64%;
+  position: relative;
+  border-radius: 50px;
+
+}
+.resultsContainer{
+  margin: 30px;
+}
+@media only screen and (min-width: 600px) {
+  .loginContainer{
+    display: flex;
+  }
+
+  .loginInput{
+    margin-left: 10px;
+  }
+}
